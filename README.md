@@ -72,8 +72,8 @@ that member, which keeps the size fixed but moves the set sideways and sometimes
 further vertex. When nothing helps for a while the set is perturbed rather than restarted.
 Several seeds gave 1128, one gave 1129.
 
-The starting set matters. Local search from a random start reached only 317 to 323 in the
-times we tried. A free search over abelian subgroups of `Z_N^6`, quantised into `Z_7^6` as in
+The starting set matters. Local search from a random start reached 953 to 969 over three
+seeds in the times we tried, against 1120 from the published start. A free search over abelian subgroups of `Z_N^6`, quantised into `Z_7^6` as in
 Polak and Schrijver, gave a conflict-free orbit of size 1092 at `N = 1092`, and unions of such
 orbits did not improve on it.
 
