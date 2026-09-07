@@ -5,7 +5,7 @@ An independent set of size 1129 in `C₇^⊠6`, with a certificate and two verif
 | | value | source |
 |---|---|---|
 | product `α(C₇⁵)·α(C₇) = 367·3` | 1101 | Polak and Schrijver, 2019 |
-| previous best known | 1120 | Itty, Rosin, Carstensen, Reichman, [arXiv:2607.21517](https://arxiv.org/abs/2607.21517), Table 2 |
+| previous best known | 1120 | Itty, Rosin, Carstensen, Reichman, [arXiv:2607.21517](https://arxiv.org/abs/2607.21517), Table 5 |
 | this repository | **1129** | `alpha-C7-6-1129.txt` |
 
 This improves a table entry, not the Shannon capacity bound. The record `Θ(C₇) ≥ 3.25883262…`
