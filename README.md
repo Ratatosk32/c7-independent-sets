@@ -27,12 +27,14 @@ OK: 1129 distinct vertices of C_7^6, pairwise non-adjacent
     alpha(C_7^6) >= 1129, so Theta(C_7) >= 1129^(1/6) = 3.22687635
 ```
 
-The two verifiers have no dependencies and share no code, so agreement between them is not
-evidence from one implementation. A third check is available: `CC_6_7_1129.txt` is the same
-set in the format of the Itty et al. repository, and their `verifier.py` accepts it
-(`inferred n 6 k 7 m 1129`, `True`). Both do the naive `O(|S|²·n)` all-pairs test, which is slow
-but short enough to read; on 1129 vertices it takes under a second. Changing one coordinate of
-one vertex makes both report adjacent pairs and exit with a nonzero status.
+The two have no dependencies and share no code, so agreement between them is not evidence
+from one implementation. Both do the naive `O(|S|²·n)` all-pairs test, which is slow but short
+enough to read; on 1129 vertices it takes under a second. Changing one coordinate of one vertex
+makes both report adjacent pairs and exit with a nonzero status.
+
+A third check comes from outside this repository. `CC_6_7_1129.txt` holds the same set in the
+format and naming of the Itty et al. repository, so their `verifier.py` reads it directly and
+reports `inferred n 6 k 7 m 1129` and `True`.
 
 ## Certificate format
 
