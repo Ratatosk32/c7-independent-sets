@@ -28,7 +28,9 @@ OK: 1129 distinct vertices of C_7^6, pairwise non-adjacent
 ```
 
 The two verifiers have no dependencies and share no code, so agreement between them is not
-evidence from one implementation. Both do the naive `O(|S|²·n)` all-pairs test, which is slow
+evidence from one implementation. A third check is available: `CC_6_7_1129.txt` is the same
+set in the format of the Itty et al. repository, and their `verifier.py` accepts it
+(`inferred n 6 k 7 m 1129`, `True`). Both do the naive `O(|S|²·n)` all-pairs test, which is slow
 but short enough to read; on 1129 vertices it takes under a second. Changing one coordinate of
 one vertex makes both report adjacent pairs and exit with a nonzero status.
 
@@ -53,6 +55,7 @@ wrap-around.
 | file | contents |
 |---|---|
 | `alpha-C7-6-1129.txt` | the certificate, 1129 vertices |
+| `CC_6_7_1129.txt` | the same set in the format and naming of the Itty et al. repository, so their `verifier.py` reads it directly |
 | `alpha-C7-6-1128.txt` | a 1128-vertex set, reached from several seeds |
 | `verify.mjs` | verifier, Node.js 20+, no dependencies |
 | `verify.py` | verifier, Python 3, standard library only |
