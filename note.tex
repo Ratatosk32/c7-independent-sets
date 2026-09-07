@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=3cm]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\bt}{\boxtimes}
+\newcommand{\al}{\alpha}
+\newtheorem{theorem}{Theorem}
+
+\title{An independent set of size 1129 in $C_7^{\bt 6}$}
+\author{Oleksii Stavriianov\thanks{ORCID \href{https://orcid.org/0009-0002-8504-3626}{0009-0002-8504-3626}, \texttt{oleksii.stavriianov@gmail.com}}}
+\date{September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give an independent set of size $1129$ in the sixth strong power of $C_7$, improving the
+best known value $1120$. A certificate and two independent verifiers are included. The best
+known lower bound on $\Theta(C_7)$ is unchanged.
+\end{abstract}
+
+\section{Result}
+
+For a graph $G$ the strong power $G^{\bt n}$ has vertex set $V(G)^n$, and distinct vertices
+$u,v$ are adjacent when for every $i$ the coordinates $u_i$ and $v_i$ are equal or adjacent.
+For a cycle this means that distinct $u,v \in \mathbb{Z}_q^n$ are adjacent exactly when their
+cyclic distance is at most $1$ in every coordinate. Independent sets of $C_q^{\bt n}$ are
+therefore the codes in $\mathbb{Z}_q^n$ whose minimum cyclic Chebyshev distance is at
+least $2$. The Shannon capacity is $\Theta(G) = \sup_n \al(G^{\bt n})^{1/n}$.
+
+\begin{theorem}
+$\al(C_7^{\bt 6}) \ge 1129$.
+\end{theorem}
+
+The certificate is the file \texttt{alpha-C7-6-1129.txt}, which lists $1129$ vertices of
+$C_7^{\bt 6}$, one per line, as six digits, the first digit being coordinate $0$.
+
+\section{Context}
+
+Two values were recorded before this note. The first is $1101 = 367 \cdot 3$, the product of
+the size-$367$ set of Polak and Schrijver \cite{PS} with a maximum independent set of $C_7$.
+The second is $1120$, found by Itty, Rosin, Carstensen and Reichman \cite{Itty} and listed in
+their Table 2. They note that it does not improve the capacity bound. Neither does $1129$.
+
+Since $\vartheta(C_7) = 7\cos(\pi/7)/(1+\cos(\pi/7)) = 3.31766720\ldots$, the Lov\'asz bound
+\cite{Lovasz} gives $\al(C_7^{\bt 6}) \le \vartheta(C_7)^6 = 1333.51\ldots$, and $1129$ is
+$0.847$ of that. The current record $\Theta(C_7) \ge 3.25883262\ldots$ comes from a recursion
+in a high power \cite{BPZ}; a single sixth-power set would have to reach $1198$ to match it,
+and $1129^{1/6} = 3.22687635\ldots$.
+
+\section{Verification}
+
+Two verifiers are included, \texttt{verify.mjs} for Node.js and \texttt{verify.py} for
+Python 3. Neither has dependencies and they share no code, so agreement between them is not
+evidence from a single implementation. Both use the naive $O(|S|^2 n)$ all-pairs test, which
+is slow but short enough to read; on $1129$ vertices it takes under a second.
+\begin{verbatim}
+    node verify.mjs alpha-C7-6-1129.txt 7 6
+    python verify.py alpha-C7-6-1129.txt 7 6
+\end{verbatim}
+Each prints \texttt{OK: 1129 distinct vertices of C\_7\^{}6, pairwise non-adjacent}. Changing
+one coordinate of one vertex makes both report adjacent pairs and exit with a nonzero status.
+
+\section{The search}
+
+The set was found by local search over the $117\,649$ vertices of $C_7^{\bt 6}$, starting from
+the $1120$-vertex set of \cite{Itty}. For each vertex outside the current set we track how
+many members it is adjacent to. A vertex adjacent to none is added. A vertex adjacent to
+exactly one member can be exchanged for that member; this keeps the size fixed but moves the
+set sideways and sometimes frees a further vertex. When no such move helps for a while, the
+set is perturbed rather than restarted. Several seeds reached $1128$; one reached $1129$. Both
+sets are included.
+
+The starting set matters. Local search from a random start reached only $317$ to $323$ within
+the times we tried. A free search over abelian subgroups of $\mathbb{Z}_N^6$, quantised into
+$\mathbb{Z}_7^6$ as in \cite{PS}, gave a conflict-free orbit of size $1092$ at $N = 1092$, and
+taking unions of such orbits and running local search on them did not improve on $1092$.
+
+\section{Local optimality}
+
+Fix a coordinate $d$ and let $L_j = \{x \in S : x_d = j\}$. Vertices in layers $j$ and $j'$
+can be adjacent only if $|j - j'| \le 1$ in $\mathbb{Z}_7$, and if $|j-j'| = 1$ the
+$d$-coordinate is already close, so adjacency depends only on the other five coordinates.
+This gives two moves.
+
+The first re-optimises a single layer. Layer $j$ meets only $L_{j-1}$ and $L_{j+1}$, so with
+those frozen the admissible rests are those avoiding $N[\mathrm{rest}(y)]$ for
+$y \in L_{j-1} \cup L_{j+1}$, and the new layer is a maximum independent set of $C_7^{\bt 5}$
+on that set. On the $1129$-vertex set this gains nothing in any of the six directions.
+
+The second re-optimises two adjacent layers together. What the argument of Baumert et al.
+\cite{Baumert} constrains is the pair sum: $L_j \cup L_{j+1}$ is independent in $C_7^{\bt 5}$,
+so $2|S| \le 7\,\al(C_7^{\bt 5})$. Treating a pair jointly allows vertices to move between the
+two layers, which the single-layer move cannot do. Over $15$ sweeps with $8$ perturbations the
+size never went above $1129$. Each perturbation forced six or seven vertices in, which evicts
+about forty since every vertex has $3^6 - 1 = 728$ neighbours, and the sweeps recovered
+exactly those forty.
+
+The same pair move took a $105$-vertex set in $C_7^{\bt 4}$ to $108$ while this work was being
+done, so it is not a weak move. One difference should be recorded: in dimension four the layer
+subproblem lives in $\mathbb{Z}_7^3$ and was solved exactly, while in dimension six it lives in
+$\mathbb{Z}_7^5$, has around $11\,000$ vertices, and was solved heuristically from a warm start.
+
+\section*{Data and code}
+
+The certificates, both verifiers and the search code are archived with this note and need only
+a stock Node.js 20 or Python 3.
+
+\begin{thebibliography}{9}
+
+\bibitem{Baumert}
+L.~D. Baumert, R.~J. McEliece, E.~Rodemich, H.~C. Rumsey, R.~Stanley and H.~Taylor,
+\emph{A combinatorial packing problem},
+in: Computers in Algebra and Number Theory, SIAM--AMS Proc.~IV (1971), 97--108.
+
+\bibitem{BPZ}
+\emph{Strengthening recursive constructions for zero-error Shannon capacity},
+arXiv:2608.30273.
+
+\bibitem{Itty}
+N.~Itty, C.~D. Rosin, C.~Carstensen and D.~Reichman,
+\emph{Improved lower bounds for the Shannon capacity of odd cycles},
+arXiv:2607.21517.
+
+\bibitem{Lovasz}
+L.~Lov\'asz, \emph{On the Shannon capacity of a graph},
+IEEE Trans.\ Inform.\ Theory \textbf{25} (1979), 1--7.
+
+\bibitem{PS}
+S.~C. Polak and A.~Schrijver,
+\emph{New lower bound on the Shannon capacity of $C_7$ from circular graphs},
+Inform.\ Process.\ Lett.\ \textbf{143} (2019), 37--40; arXiv:1808.07438.
+
+\end{thebibliography}
+
+\end{document}
