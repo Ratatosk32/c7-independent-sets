@@ -5,5 +5,3 @@
 *.fls
 *.fdb_latexmk
 
-# arXiv staging directory, regenerate with the command in SUBMISSION.md
-arxiv/

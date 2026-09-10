@@ -33,7 +33,8 @@ cp alpha-C7-6-1129.txt alpha-C7-6-1128.txt CC_6_7_1129.txt verify.mjs verify.py 
 cd arxiv && tar -czf ../arxiv-submission.tar.gz note.tex anc && cd ..
 ```
 
-The staging directory `arxiv/` is git-ignored; the tarball is committed.
+Both the staging directory `arxiv/` and the built tarball are committed, so the upload is
+reproducible from a clean checkout.
 
 Checked before packaging: source is pure ASCII, braces balanced, dollar signs even, all seven
 bibliography entries cited and all citations resolved, packages limited to `inputenc`,
