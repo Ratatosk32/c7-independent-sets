@@ -23,3 +23,7 @@ The two verifiers share no code and have no dependencies, so agreement between t
 not evidence from a single implementation. Both run the naive O(|S|^2 n) all-pairs test,
 which is slow but short enough to audit by reading. Altering one coordinate of one vertex
 makes both report adjacent pairs and exit with a nonzero status.
+
+The search and both verifiers were written with the assistance of a large language model.
+A certificate is true or false on its own terms, whatever produced it, and these two
+programs are the means of settling it.

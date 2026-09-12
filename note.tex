@@ -109,12 +109,18 @@ done, so it is not a weak move. One difference should be recorded: in dimension 
 subproblem lives in $\mathbb{Z}_7^3$ and was solved exactly, while in dimension six it lives in
 $\mathbb{Z}_7^5$, has around $11\,000$ vertices, and was solved heuristically from a warm start.
 
-\section*{Data and code}
+\section*{Data, code and assistance}
 
 The two certificates and both verifiers accompany this note as ancillary files and need only
 a stock Node.js 20 or Python 3. The same files, together with the search code, are at
 \url{https://github.com/Ratatosk32/c7-independent-sets} and are archived at
 \href{https://doi.org/10.5281/zenodo.22643652}{doi:10.5281/zenodo.22643652}.
+
+The local search, the layer moves of Section~5 and both verifiers were carried out with the
+assistance of a large language model. The result does not rest on that. What is claimed here is
+a single list of $1129$ vertices, and either verifier settles it outright by the naive all-pairs
+test, which is slow but short enough to audit by reading; the two share no code and have no
+dependencies. A certificate is true or false on its own terms, whatever produced it.
 
 \begin{thebibliography}{99}
 

@@ -105,6 +105,13 @@ vertices, and was solved heuristically from a warm start.
 Please cite this archive together with the source of the starting set, Itty, Rosin, Carstensen
 and Reichman, [arXiv:2607.21517](https://arxiv.org/abs/2607.21517).
 
+## Assistance
+
+The local search, the note and both verifiers were carried out with the assistance of a large
+language model. The result does not rest on that: what is claimed is a single list of 1129
+vertices, and either verifier settles it outright by a naive all-pairs test short enough to
+audit by reading. A certificate is true or false on its own terms, whatever produced it.
+
 ## License
 
 Code and data: MIT. The note: CC BY 4.0.
